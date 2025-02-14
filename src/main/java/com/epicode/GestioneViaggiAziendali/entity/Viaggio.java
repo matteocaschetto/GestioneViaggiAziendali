@@ -2,9 +2,7 @@ package com.epicode.GestioneViaggiAziendali.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -16,12 +14,12 @@ public class Viaggio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_viaggio;
+    private Long viaggioId;
 
     @Column(nullable = false)
     private String destinazione;
-    private LocalDate dataViaggio;
+    private LocalDate data;
 
-
-    private String stato;
+    @Enumerated(EnumType.STRING)
+    private StatoViaggio stato;
 }

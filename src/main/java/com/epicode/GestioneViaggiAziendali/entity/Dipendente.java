@@ -1,9 +1,9 @@
 package com.epicode.GestioneViaggiAziendali.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -14,7 +14,7 @@ public class Dipendente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_dipendente;
+    private Long dipendenteId;
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -22,4 +22,9 @@ public class Dipendente {
     private String cognome;
     @Column(unique = true)
     private String email;
+
+    private String immagineProfilo;
+
+    @OneToMany(mappedBy = "dipendente")
+    private List<Prenotazione> prenotazioni;
 }
