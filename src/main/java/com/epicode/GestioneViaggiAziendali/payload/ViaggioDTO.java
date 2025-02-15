@@ -6,8 +6,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Data
 public class ViaggioDTO {
     private String destinazione;

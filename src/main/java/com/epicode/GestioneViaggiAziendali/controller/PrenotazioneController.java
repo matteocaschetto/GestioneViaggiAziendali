@@ -16,7 +16,7 @@ public class PrenotazioneController {
     @Autowired
     private PrenotazioneService prenotazioneService;
 
-    @PostMapping
+    @PostMapping("/prenotazione")
     public ResponseEntity<Prenotazione> createPrenotazione(@RequestBody PrenotazioneDTO prenotazioneDTO) {
         Prenotazione prenotazione = PrenotazioneMapper.mapToEntity(prenotazioneDTO);
         Prenotazione savedPrenotazione = prenotazioneService.savePrenotazione(prenotazione);

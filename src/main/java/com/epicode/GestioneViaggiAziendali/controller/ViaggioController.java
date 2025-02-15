@@ -3,6 +3,7 @@ package com.epicode.GestioneViaggiAziendali.controller;
 import com.epicode.GestioneViaggiAziendali.entity.StatoViaggio;
 import com.epicode.GestioneViaggiAziendali.entity.Viaggio;
 import com.epicode.GestioneViaggiAziendali.mapper.ViaggioMapper;
+import com.epicode.GestioneViaggiAziendali.payload.DipendenteDTO;
 import com.epicode.GestioneViaggiAziendali.payload.ViaggioDTO;
 import com.epicode.GestioneViaggiAziendali.service.ViaggioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,13 @@ public class ViaggioController {
     @Autowired
     private ViaggioService viaggioService;
 
-    @PostMapping
-    public ResponseEntity<Viaggio> createViaggio(@RequestBody ViaggioDTO viaggioDTO) {
-        Viaggio viaggio = ViaggioMapper.mapToEntity(viaggioDTO);
-        Viaggio savedViaggio = viaggioService.saveViaggio(viaggio);
-        return new ResponseEntity<>(savedViaggio, HttpStatus.CREATED);
+    @PostMapping("/viaggio")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ViaggioDTO createViaggio(@RequestBody ViaggioDTO viaggioDTO){
+        if(viaggioDTO.getDestinazione() == null){
+            throw new RuntimeException("Non è possibile creare un viaggio senza destionazione");
+        }
+        return viaggioService.createViaggio(viaggioDTO);
     }
 
     @GetMapping("/{id}")
@@ -34,7 +37,7 @@ public class ViaggioController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/destinazione")
     public ResponseEntity<Void> deleteViaggio(@PathVariable Long id) {
         viaggioService.deleteViaggio(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

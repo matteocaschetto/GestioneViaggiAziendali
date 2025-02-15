@@ -41,11 +41,5 @@ public class PrenotazioneService {
         prenotazioneRepository.deleteById(id);
     }
 
-    public Viaggio getViaggioById(Long id) {
-        return viaggioRepository.findById(id).orElse(null);
-    }
 
-    public Dipendente getDipendenteById(Long id) {
-        return dipendenteRepository.findById(id).orElse(null);
-    }
 }

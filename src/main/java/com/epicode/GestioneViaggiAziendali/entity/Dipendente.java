@@ -2,13 +2,15 @@ package com.epicode.GestioneViaggiAziendali.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Entity
+@Entity(name = "dipendente")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Component
 public class Dipendente {
 
 

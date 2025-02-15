@@ -3,13 +3,15 @@ package com.epicode.GestioneViaggiAziendali.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
-@Entity
+@Entity(name = "viaggio")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Component
 public class Viaggio {
 
     @Id

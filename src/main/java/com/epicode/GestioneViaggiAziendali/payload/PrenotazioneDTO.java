@@ -5,8 +5,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Data
 public class PrenotazioneDTO {
     private Long viaggioId;

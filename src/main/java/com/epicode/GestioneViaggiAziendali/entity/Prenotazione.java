@@ -2,13 +2,15 @@ package com.epicode.GestioneViaggiAziendali.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
-@Entity
+@Entity(name = "prenotazione")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Component
 public class Prenotazione {
 
     @Id

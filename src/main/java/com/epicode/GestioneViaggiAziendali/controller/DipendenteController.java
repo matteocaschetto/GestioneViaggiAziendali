@@ -7,6 +7,7 @@ import com.epicode.GestioneViaggiAziendali.mapper.DipendenteMapper;
 import com.epicode.GestioneViaggiAziendali.payload.DipendenteDTO;
 import com.epicode.GestioneViaggiAziendali.service.DipendenteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -28,6 +29,18 @@ public class DipendenteController {
     private Cloudinary cloudinary;
 
 
+
+
+    @PostMapping("/dipendente")
+    @ResponseStatus(HttpStatus.CREATED)
+    public DipendenteDTO createDipendente(@RequestBody DipendenteDTO dipendenteDTO){
+        if(dipendenteDTO.getNome() == null){
+            throw new RuntimeException("Non è possibile creare un autore senza il nome");
+        }
+        return dipendenteService.createDipendente(dipendenteDTO);
+    }
+
+
     @PostMapping("/nuovoDipendenteConAvatar")
     public ResponseEntity<Dipendente> nuovoDipendenteConAvatar(@RequestPart("avatarDipendente") MultipartFile avatarDipendente, @RequestBody @Validated DipendenteDTO dipendenteDTO, BindingResult validazione){
 
@@ -39,11 +52,10 @@ public class DipendenteController {
             Map mappa = cloudinary.uploader().upload(avatarDipendente.getBytes(), ObjectUtils.emptyMap());
             String urlImage = (String) mappa.get("secure_url");
             dipendenteDTO.setImmagineProfilo(urlImage);
+            Long idGenerato = dipendenteService.nuovoDipendente(dipendenteDTO);
 
-            Dipendente dipendente = DipendenteMapper.mapToEntity(dipendenteDTO);
-            Dipendente savedDipendente = dipendenteService.saveDipendente(dipendente);
 
-            return new ResponseEntity<>(savedDipendente, HttpStatus.CREATED);
+            return new ResponseEntity<>(HttpStatus.CREATED);
 
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

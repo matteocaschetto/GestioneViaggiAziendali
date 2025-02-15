@@ -2,7 +2,10 @@ package com.epicode.GestioneViaggiAziendali.mapper;
 
 import com.epicode.GestioneViaggiAziendali.entity.Viaggio;
 import com.epicode.GestioneViaggiAziendali.payload.ViaggioDTO;
+import org.springframework.stereotype.Component;
 
+
+@Component
 public class ViaggioMapper {
     public static ViaggioDTO mapToDTO(Viaggio viaggio) {
         if (viaggio == null) {
@@ -17,7 +20,7 @@ public class ViaggioMapper {
         return dto;
     }
 
-    public static Viaggio mapToEntity(ViaggioDTO dto) {
+    public static Viaggio ToEntity(ViaggioDTO dto) {
         if (dto == null) {
             return null;
         }

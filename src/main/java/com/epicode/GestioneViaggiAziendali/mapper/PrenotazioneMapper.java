@@ -4,8 +4,10 @@ import com.epicode.GestioneViaggiAziendali.entity.Dipendente;
 import com.epicode.GestioneViaggiAziendali.entity.Prenotazione;
 import com.epicode.GestioneViaggiAziendali.entity.Viaggio;
 import com.epicode.GestioneViaggiAziendali.payload.PrenotazioneDTO;
+import org.springframework.stereotype.Component;
 
 
+@Component
 public class PrenotazioneMapper {
     public static PrenotazioneDTO mapToDTO(Prenotazione prenotazione) {
         if (prenotazione == null) {
